@@ -6,6 +6,7 @@ import random
 class ParkingLot:
     def __init__(self):
         self.parking_events = []
+        self.df = None
 
     def generate_data(self):
         # Make 20 parking events
@@ -36,12 +37,18 @@ class ParkingLot:
         # Convert to DataFrame
         df = pd.DataFrame(self.parking_events)
 
-        # Save to CSV
-        df.to_csv("/Users/piyushu/PMS/ParkingManagementSystem/data/parking_data.csv", index=False)
+        # Save to CSV with relative path
+        df.to_csv("../data/parking_data.csv", index=False)
 
         return df
 
+    def load_data(self):
+        # Load CSV into self.df with relative path
+        self.df = pd.read_csv("../data/parking_data.csv")
+        print(self.df)
 
-# Create ParkingLot object and call method
+
+# Create ParkingLot object and call methods
 parking_lot = ParkingLot()
 parking_lot.generate_data()
+parking_lot.load_data()
